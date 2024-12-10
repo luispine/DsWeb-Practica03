@@ -1,0 +1,5 @@
+org\uv\dsweb\practica03\UserBean.class
+org\uv\dsweb\practica03\Models\User.class
+DAO\UserDAO.class
+org\uv\dsweb\practica03\Principal.class
+org\uv\dsweb\practica03\DatabaseConnection.class

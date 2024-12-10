@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>CRUD de Usuarios</title>
+    </h:head>
+
+    <h:body>
+
+        <h:form id="userForm">
+            
+            <!-- Formulario para crear nuevo usuario -->
+            <h2 style="margin-bottom: 1rem;">Crear nuevo usuario</h2>
+            <h:panelGrid columns="2" style="border: 1px #bfc9ca solid; padding: 1rem; border-radius: 1rem; margin: 0 auto; margin-bottom: 2rem;">
+                <h:outputLabel for="name" value="Nombre:" />
+                <p:inputText id="name" value="#{userBean.user.name}" />
+
+                <h:outputLabel for="lastname" value="Apellido:" />
+                <p:inputText id="lastname" value="#{userBean.user.lastname}" />
+
+                <h:outputLabel for="cellphone" value="Teléfono:" />
+                <p:inputText id="cellphone" value="#{userBean.user.cellphone}" />
+
+                <!-- Botón Guardar con espaciado -->
+                <h:outputLabel />
+                <p:commandButton value="Guardar" 
+                                 action="#{userBean.crearUsuario()}" 
+                                 icon="pi pi-check" 
+                                 update="userForm growl" 
+                                 style="background-color: #3498db; color: white; margin-top: 1rem; border-radius: 1rem; " />
+            </h:panelGrid>
+
+            <!-- Mostrar mensajes -->
+            <p:growl id="growl" showDetail="true" />
+
+            <!-- DataTable con usuarios -->
+            <p:dataTable var="user" value="#{userBean.users}" editable="true" styleClass="data-table" style="width: 100%;">
+                <p:column headerText="ID">
+                    <h:outputText value="#{user.id}" />
+                </p:column>
+
+                <p:column headerText="Nombre">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{user.name}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{user.name}" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Apellido">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{user.lastname}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{user.lastname}" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Teléfono">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{user.cellphone}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{user.cellphone}" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Acciones">
+                    <!-- Botón Editar con espaciado -->
+                    <p:commandButton value="Editar" 
+                                     icon="pi pi-pencil" 
+                                     action="#{userBean.editar(user)}" 
+                                     update="userForm" 
+                                     style="margin-right: 10px; background-color: #f39c12; color: white; border-radius: 1rem; border-color: #f39c12;" />
+                    
+                    <!-- Botón Eliminar con espaciado -->
+                    <p:commandButton value="Eliminar" 
+                                     icon="pi pi-trash" 
+                                     action="#{userBean.eliminar(user)}" 
+                                     update="userForm" 
+                                     style="background-color: #e74c3c; color: white; border-radius: 1rem; border-color: #e74c3c;" />
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+
+    </h:body>
+</html>
